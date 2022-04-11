@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Menuplat{% endblock %}
+
+{% block body %}
+    <h1>Create new Menuplat</h1>
+
+    {{ include('menuplat/_form.html.twig') }}
+
+    <a href="{{ path('menuplat_index') }}">back to list</a>
+{% endblock %}

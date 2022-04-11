@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Menuplat{% endblock %}
+
+{% block body %}
+    <h1>Edit Menuplat</h1>
+
+    {{ include('menuplat/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('menuplat_index') }}">back to list</a>
+
+    {{ include('menuplat/_delete_form.html.twig') }}
+{% endblock %}
