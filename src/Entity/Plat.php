@@ -33,7 +33,7 @@ class Plat
      *@Assert\NotBlank(message=" nom doit etre non vide")
      * @Assert\Length(
      *      min = 5,
-     *      minMessage=" Entrer un titre au mini de 5 caracteres"
+     *      minMessage=" Entrer un titre au mini de 5 caracteres")
      *
      * @ORM\Column(name="Nom", type="string", length=50, nullable=true)
      */

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+<div style=" margin-top: 150px;display: flex;align-items: center;justify-content: center""display: flex;align-items: center;justify-content: center">
+
+    <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                 <th>Reservation N°</th>
+                <th>Date</th>
+                <th>Utilisateur</th>
+                <th>Etat</th>
+                <th>Nombre de personnes</th>
+                
+                <th>Type de resvervation</th>
+               
+                <th>Centre de camping reserver</th>
+                <th>Maison d'hote reserver</th>
+                
+                <th>Restaurant reserver</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.reservationid }}</td>
+                <td>{{ reservation.date }}</td>
+                <td>{{ reservation.utilisateurid }}</td>
+                <td>{{ reservation.etat ? 'overt' : 'fermée' }}</td>
+                <td>{{ reservation.nbpersonnes }}</td>
+                <td>{{ reservation.typeresv }}</td>
+                
+                <td>{{ reservation.centrecampingid }}</td>
+                <td>{{ reservation.maisonDhoteid }}</td>
+                <td>{{ reservation.restaurantid }}</td>
+                <td>
+                    <a href="{{ path('reservation_show', {'reservationid': reservation.reservationid}) }}">show</a>
+                    <a href="{{ path('reservation_edit', {'reservationid': reservation.reservationid}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('reservation_new') }}">Create new</a> </div>
+{% endblock %}

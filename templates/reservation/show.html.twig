@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+<div style=" margin-top: 150px;display: flex;align-items: center;justify-content: center""display: flex;align-items: center;justify-content: center">
+
+    <h1>Reservation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Reservation N°</th>
+                <td>{{ reservation.reservationid }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reservation.date }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ reservation.etat ? 'overt' : 'fermée' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de personnes</th>
+                <td>{{ reservation.nbpersonnes }}</td>
+            </tr>
+            
+            <tr>
+                <th>Type de resvervation</th>
+                <td>{{ reservation.typeresv }}</td>
+            </tr>
+           
+            <tr>
+                <th>Centrecamping reserver</th>
+                <td>{{ reservation.centrecampingid }}</td>
+            </tr>
+            <tr>
+                <th>Maison D'hote reserver</th>
+                <td>{{ reservation.maisonDhoteid }}</td>
+            </tr>
+            <tr>
+                <th>Persone reserver</th>
+                <td>{{ reservation.utilisateurid }}</td>
+            </tr>
+            <tr>
+                <th>Restaurant reserver</th>
+                <td>{{ reservation.restaurantid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('reservation_index') }}">back to list</a>
+
+    <a href="{{ path('reservation_edit', {'reservationid': reservation.reservationid}) }}">edit</a>
+
+    {{ include('reservation/_delete_form.html.twig') }} </div>
+{% endblock %}
