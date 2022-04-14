@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menuplat{% endblock %}
+
+{% block body %}
+    <h1>Menuplat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ menuplat.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('menuplat_index') }}">back to list</a>
+
+    <a href="{{ path('menuplat_edit', {'id': menuplat.id}) }}">edit</a>
+
+    {{ include('menuplat/_delete_form.html.twig') }}
+{% endblock %}
