@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="menu")
  * @ORM\Entity
+ */
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\MenuRepository")
  */
 class Menu
 {
@@ -23,14 +27,24 @@ class Menu
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message=" description doit etre non vide")
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 100,
+     *      minMessage = "doit etre >=7 ",
+     *      maxMessage = "doit etre <=100" )
+     * @ORM\Column(name="description", type="string", length=30, nullable=true)
      */
     private $description;
 
     /**
      * @var string
+     * @Assert\NotBlank(message=" titre doit etre non vide")
+     * @Assert\Length(
+     *      min = 5,
+     *      minMessage=" Entrer un titre au mini de 5 caracteres"
      *
+     *     )
      * @ORM\Column(name="titre", type="string", length=20, nullable=false)
      */
     private $titre;

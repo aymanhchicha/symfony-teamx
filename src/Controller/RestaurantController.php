@@ -9,6 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Menu;
+use App\Repository\MenuRepository;
+use PhpParser\Node\Expr\Cast\String_;
+use SebastianBergmann\Environment\Console;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\ExpressionLanguage\Node\GetAttrNode;
 
 /**
  * @Route("/restaurant")
@@ -32,13 +39,20 @@ class RestaurantController extends AbstractController
     /**
      * @Route("/new", name="restaurant_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,MenuRepository $repMenu): Response
     {
         $restaurant = new Restaurant();
+        $menu=new menu();
+
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $titre=$restaurant->getNom();
+            $MenuController=new MenuController;
+            $MenuController->newmenu($titre,$entityManager);
+            $id=$repMenu->SearchByName($titre);
+
             $entityManager->persist($restaurant);
             $entityManager->flush();
 

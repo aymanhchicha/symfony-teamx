@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Menu;
 use App\Form\MenuType;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,6 +49,28 @@ class MenuController extends AbstractController
         return $this->render('menu/new.html.twig', [
             'menu' => $menu,
             'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
+   /**
+     * @Route("/xx", name="xx", methods={"GET", "POST"})
+     */
+
+    public function newmenu(String $titre,EntityManagerInterface $entityManager): String
+    {
+        $menu = new Menu("aa",$titre);
+            $entityManager->persist($menu);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('menu_index', [], Response::HTTP_SEE_OTHER);
+      
+
+        return $this->render('menu/new.html.twig', [
+            'menu' => $menu
+           
         ]);
     }
 

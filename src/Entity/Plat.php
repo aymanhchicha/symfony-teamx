@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,17 +10,30 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="plat")
  * @ORM\Entity
  */
+
+ /**
+ * @ORM\Entity(repositoryClass="App\Repository\PlatRepository")
+ */
 class Plat
 {
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message=" description doit etre non vide")
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 100,
+     *      minMessage = "doit etre >=7 ",
+     *      maxMessage = "doit etre <=100" )
      * @ORM\Column(name="Description", type="string", length=50, nullable=true)
      */
     private $description;
 
     /**
      * @var string|null
+     *@Assert\NotBlank(message=" nom doit etre non vide")
+     * @Assert\Length(
+     *      min = 5,
+     *      minMessage=" Entrer un titre au mini de 5 caracteres"
      *
      * @ORM\Column(name="Nom", type="string", length=50, nullable=true)
      */
@@ -28,7 +41,7 @@ class Plat
 
     /**
      * @var int|null
-     *
+     *@Assert\NotBlank(message=" prix doit etre non vide")
      * @ORM\Column(name="Prix", type="integer", nullable=true)
      */
     private $prix;
@@ -44,7 +57,9 @@ class Plat
 
     /**
      * @var string
-     *
+     *   @Assert\NotBlank(message=" categorie doit etre non vide")
+     * 
+
      * @ORM\Column(name="categorie", type="string", length=20, nullable=false)
      */
     private $categorie;

@@ -3,7 +3,14 @@
 {% block title %}Edit Plat{% endblock %}
 
 {% block body %}
-    <h1>Edit Plat</h1>
+ <div class="row">
+
+            <div class="card">
+                  <a href="{{ path('plat_index') }}"  class="ri-arrow-left-circle-fill" style="font-size: 50px"></a>
+
+                <div class="card-body">
+                    <h5 class="card-title">Modifier ce Plat</h5>
+    <h1>Modifier Plat</h1>
 
     {{ include('plat/_form.html.twig', {'button_label': 'Update'}) }}
 

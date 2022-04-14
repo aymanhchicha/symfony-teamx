@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="menuplat", indexes={@ORM\Index(name="menufk", columns={"idmenu"}), @ORM\Index(name="platfk", columns={"idplat"})})
  * @ORM\Entity
  */
+
+ /**
+ * @ORM\Entity(repositoryClass="App\Repository\MenuPlatRepository")
+ */
 class Menuplat
 {
     /**
