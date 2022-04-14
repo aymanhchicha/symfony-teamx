@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div style="display:flex;align-items: center;justify-content: center;margin-top: 150px">
+    <div style="display:flex;align-items: center;justify-content: center;margin-top: 150px;padding: 10px">
 
         <div class="card">
             <div class="card-body">
@@ -8,68 +8,64 @@
 
 
 
-                    {{ form_start(f) }}
-                    <div class="row mb-3">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+
+                        <label for="inputEmail" class="col-sm-4 col-form-label">Email</label>
                         <div class="col-sm-10">
                             {{ form_widget(f.Email,{'attr':{'class':'form-control'}}) }}
+
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputText" class="col-sm-2 col-form-label">Nom</label>
+                {{ form_errors(f.Email,{'attr':{'class':'text-danger'}}) }}
+
+                        <label for="inputText" class="col-sm-4 col-form-label">Nom</label>
                         <div class="col-sm-10">
                             {{ form_widget(f.Nom,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(f.Nom,{'attr':{'class':'text-danger'}}) }}
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputText" class="col-sm-2 col-form-label">Prenom</label>
+
+                       <label for="inputText" class="col-sm-4 col-form-label">Prenom</label>
                         <div class="col-sm-10">
                             {{ form_widget(f.Prenom,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(f.Prenom,{'attr':{'class':'text-danger'}}) }}
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputNumber" class="col-sm-2 col-form-label">Numéro</label>
+
+
+                        <label for="inputNumber" class="col-sm-4 col-form-label">Numéro</label>
                         <div class="col-sm-10">
                             {{ form_widget(f.Numtel,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(f.Numtel,{'attr':{'class':'text-danger'}}) }}
                         </div>
-                    </div>
+
                     <fieldset class="row mb-3">
-                        <legend class="col-form-label col-sm-2 pt-0">Role</legend>
+                        <legend class="col-form-label col-sm-4 pt-0">Role</legend>
                         <div class="col-sm-10">
                             <div class="form-check">
-                                {{ form_widget(f.Role,{'attr':{'class':'form-check-input', 'type':'radio' ,'name':'gridRadios' ,'id':'gridRadios1' ,'value':'option1'}}) }}
+                                {{ form_widget(f.Role,{'attr':{'class':'form-check-input'}}) }}
+                            </div>
+                            <div class="form-check">
+                                {{ form_widget(f.Role,{'attr':{'class':'form-check-input'}}) }}
 
-                                <label class="form-check-label" for="gridRadios1">
-                                    Admin
-                                </label>
                             </div>
                             <div class="form-check">
-                                {{ form_widget(f.Role,{'attr':{'class':'form-check-input', 'type':'radio' ,'name':'gridRadios' ,'id':'gridRadios1' ,'value':'option1'}}) }}
-                                <label class="form-check-label" for="gridRadios2">
-                                    Proprietaire
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                {{ form_widget(f.Role,{'attr':{'class':'form-check-input', 'type':'radio' ,'name':'gridRadios' ,'id':'gridRadios1' ,'value':'option1'}}) }}
-                                <label class="form-check-label" for="gridRadios3">
-                                    Voyageur
-                                </label>
+                                {{ form_widget(f.Role,{'attr':{'class':'form-check-input'}}) }}
+
                             </div>
                         </div>
                     </fieldset>
-                    <div class="row mb-3">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+
+                        <label for="inputPassword" class="col-sm-5 col-form-label" style="margin-top: 50px">Password</label>
                         <div class="col-sm-10">
                             {{ form_widget(f.Mp,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(f.Mp,{'attr':{'class':'text-danger'}}) }}
                         </div>
-                    </div>
-                    <div class="row mb-3">
+
+
 
                         <div class="col-sm-10">
                             {{ form_widget(f.ajouter,{'attr':{'class':'btn btn-primary'}}) }}
 
                         </div>
-                    </div>
+
 
         {{ form_end(f) }}
 

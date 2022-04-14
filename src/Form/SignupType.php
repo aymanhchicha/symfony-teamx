@@ -4,6 +4,8 @@ namespace App\Form;
 
 use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +19,14 @@ class SignupType extends AbstractType
             ->add('Nom')
             ->add('Prenom')
             ->add('Numtel')
-            ->add('Role')
+            ->add('Role',ChoiceType::class, [
+                'choices' => [
+                    'Admin' => 'admin',
+                    'Proprietaire' => 'proprietaire',
+                    'Voyageur' => 'voyageur',
+                ],
+                'expanded' => true
+            ])
             ->add('Mp')
             ->add('ajouter',SubmitType::class)
 

@@ -35,7 +35,7 @@ class UtilisateurController extends AbstractController
             $em->persist($u);
             $em->flush();
 
-            return $this->redirectToRoute('utilisateur');
+            return $this->redirectToRoute('table');
         }
         return $this->render('utilisateur/signup.html.twig',['f'=>$form->createView()]);
     }
@@ -53,6 +53,43 @@ class UtilisateurController extends AbstractController
             return $this->render('utilisateur/index.html.twig',['u'=>$us]);
         }
         return $this->render('utilisateur/signin.html.twig',['f'=>$form->createView()]);
+
+    }
+    /**
+     * @Route("/table", name="table")
+     */
+    public function affiche(Request $request): Response
+    {
+        $u=$this->getDoctrine()->getManager()->getRepository(Utilisateur::class)->findAll();
+        return $this->render('utilisateur/index.html.twig',['f'=>$u]);
+
+    }
+    /**
+     * @Route("/modifuser/{id}", name="modifier")
+     */
+    public function modifier(Request $request,$id): Response
+    {
+        $u=$this->getDoctrine()->getManager()->getRepository(Utilisateur::class)->find($id);
+        $form=$this->createForm(SignupType::class,$u);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()&& $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+
+            $em->flush();
+
+            return $this->redirectToRoute('table');
+        }
+        return $this->render('utilisateur/updateuser.html.twig',['f'=>$form->createView()]);
+    }
+    /**
+     * @Route("/suppuser/{id}", name="suppuser")
+     */
+    public function supprimer(Utilisateur $u): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($u);
+        $em->flush();
+        return $this->redirectToRoute('table');
 
     }
 

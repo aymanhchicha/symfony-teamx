@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Asserts;
 
 /**
  * Utilisateur
@@ -14,7 +15,7 @@ class Utilisateur
 {
     /**
      * @var string|null
-     *
+     * @Asserts\NotBlank(message="Email doit etre non vide")
      * @ORM\Column(name="Email", type="string", length=50, nullable=true)
      */
     private $email;
@@ -30,21 +31,21 @@ class Utilisateur
 
     /**
      * @var string|null
-     *
+     * @Asserts\NotBlank(message="Nom doit etre non vide")
      * @ORM\Column(name="Nom", type="string", length=50, nullable=true)
      */
     private $nom;
 
     /**
      * @var int|null
-     *
+     * @Asserts\NotBlank(message="Numéro doit etre non vide")
      * @ORM\Column(name="Numtel", type="bigint", nullable=true)
      */
     private $numtel;
 
     /**
      * @var string|null
-     *
+     * @Asserts\NotBlank(message="Prenom doit etre non vide")
      * @ORM\Column(name="Prenom", type="string", length=30, nullable=true)
      */
     private $prenom;
@@ -58,6 +59,11 @@ class Utilisateur
 
     /**
      * @var string
+     * @Asserts\NotBlank(message="Mot de passe doit etre non vide")
+     * @Asserts\Length(
+     *     min=8,
+     *     minMessage="votre Mot de passe doit avoir minimum 8 caractére"
+     * )
      *
      * @ORM\Column(name="mp", type="string", length=50, nullable=false)
      */
