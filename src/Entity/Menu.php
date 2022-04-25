@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Menu
 {
     /**
-     * @var int
+     
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -33,7 +33,7 @@ class Menu
      *      max = 100,
      *      minMessage = "doit etre >=7 ",
      *      maxMessage = "doit etre <=100" )
-     * @ORM\Column(name="description", type="string", length=30, nullable=true)
+     * @ORM\Column(name="description", type="string", length=30, nullable=false)
      */
     private $description;
 

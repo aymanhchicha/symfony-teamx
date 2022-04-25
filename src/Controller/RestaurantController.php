@@ -10,7 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Menu;
+use App\Entity\Plat;
 use App\Repository\MenuRepository;
+use App\Repository\PlatRepository;
+
 use PhpParser\Node\Expr\Cast\String_;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -36,6 +39,27 @@ class RestaurantController extends AbstractController
         ]);
     }
 
+
+ /**
+ * @Route("/menuresto/{id}", name="restaurantMenu_show", methods={"GET"})
+ */
+    public function showmenu(Restaurant $restaurant,EntityManagerInterface $entityManager,platRepository $rep): Response
+    {
+        $id =$restaurant->getId();
+        $plat = $rep->listplatByResto($id);
+        dd($plat);
+        return $this->render('restaurant/consulterResto.html.twig', [
+            'restaurant' => $restaurant,
+        ]);
+    
+    }
+
+
+
+
+
+
+
     /**
      * @Route("/new", name="restaurant_new", methods={"GET", "POST"})
      */
@@ -49,10 +73,15 @@ class RestaurantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $titre=$restaurant->getNom();
+        
             $MenuController=new MenuController;
-            $MenuController->newmenu($titre,$entityManager);
-            $id=$repMenu->SearchByName($titre);
+           $MenuController->newmenu($titre,$entityManager);
+           dump($titre);
 
+ 
+           $menu=$repMenu->findOneBy(array ('titre'=>$titre));
+           $id=$menu->getId();
+           $restaurant->setMenuid($menu);
             $entityManager->persist($restaurant);
             $entityManager->flush();
 

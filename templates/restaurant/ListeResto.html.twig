@@ -1,0 +1,158 @@
+{% extends 'basePROP.html.twig' %}
+
+{% block slide %}
+    <section class="slider-pro slider" id="slider">
+        <div class="sp-slides">
+
+            <!-- Slides -->
+            <div class="sp-slide main-slides">
+                <div class="img-overlay"></div>
+
+                <img class="sp-image" src="{{asset('assets/front/images/rest1.jpg')}}"" alt="Slider 1"/>
+
+                <h1 class="sp-layer slider-text-big"
+                data-position="center" data-show-transition="left" data-hide-transition="right" data-show-delay="1500" data-hide-delay="200">
+                <span class="highlight-texts"> Un goût de légende</span>
+                </h1>
+
+                <p class="sp-layer slider-text-big"
+                data-position="center" data-vertical="15%" data-show-delay="2000" data-hide-delay="200" data-show-transition="left" data-hide-transition="right">
+                la saveurs , un vrai bonheur
+                </p>
+            </div>
+            <!-- Slides End -->
+
+            <!-- Slides -->
+            <div class="sp-slide main-slides">
+            <div class="img-overlay"></div>
+                <img class="sp-image" src="{{asset('assets/front/images/rest.jpg')}}" alt="Slider 2"/>
+
+                <h1 class="sp-layer slider-text-big"
+                data-position="center" data-show-transition="left" data-hide-transition="right" data-show-delay="1500" data-hide-delay="200">
+                <span class="highlight-texts">Bien manger, un plaisir à partager</span>
+                </h1>
+
+                <p class="highlight-texts"
+                data-position="center" data-vertical="15%" data-show-delay="2000" data-hide-delay="200" data-show-transition="left" data-hide-transition="right">
+                    découvrer les meilleurs restaurants.
+                </p>
+            </div>
+
+            <!-- Slides -->
+            <div class="sp-slide main-slides">
+                <div class="img-overlay"></div>
+
+                <img class="sp-image" src="{{asset('assets/front/images/rest1.jpg')}}" alt="Slider 3"/>
+
+                <h1 class="sp-layer slider-text-big"
+                data-position="center" data-show-transition="left" data-hide-transition="right" data-show-delay="1500" data-hide-delay="200">
+                <span class="highlight-texts">Le goût d'en faire plus</span>
+                </h1>
+
+              
+            </div>
+            <!-- Slides End -->
+
+        </div>
+    </section>
+{% endblock %}
+
+   {% block navbar %}{% endblock %}
+   {% block about %} {% endblock %}
+
+    {% block services %}
+
+    <section id="services" class="section-wrapper">
+        <div class="container">
+            <div class="row">
+
+                <!-- Section Header -->
+                <div class="col-md-12 col-sm-12 col-xs-12 section-header wow fadeInDown">
+                    <h2><span class="highlight-text">Listes des Restaurants</span></h2>
+                   
+                    <p class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1">Découvrer les meilleurs restaurants</p>
+                </div>
+                <!-- Section Header End -->
+ 
+                <div class="our-services">
+			     <div class="row">
+                        {% for rest in restaurants %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{asset('assets/front/images/rest1.jpg')}}"  class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text"> le restaurant{{ rest.nom }}</p>
+                        <div class="d-flex justify-content-between align-item-center">
+                            <a href="{{ path('restaurantMenu_show', {'id': rest.id})}}" class="btn btn-danger">Consulter restaurant</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+                      
+</div>
+
+		
+	 <section id="services" class="section-wrapper">
+        <div class="container">
+            <div class="row">
+
+                <!-- Section Header -->
+                <div class="col-md-12 col-sm-12 col-xs-12 section-header wow fadeInDown">
+                    <h2><span class="highlight-text">Services</span></h2>
+                   
+                    <p class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1">Notre Restaurant vous offre une varieté de services</p>
+                </div>
+                <!-- Section Header End -->
+ 
+                <div class="our-services">
+			     <div class="row">
+                     
+                        <div class="col-md-4 col-sm-4 col-xs-12 text-xs-center wow fadeInDown" data-wow-delay=".1s">
+						<div class="service-box">
+                            <div class="icon">
+                                <i class="icon_group"></i><h3>Réserver place</h3>
+                            </div>
+                            
+                            <p>Réserver vos places</p>
+                        </div>
+</div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 text-xs-center wow fadeInDown" data-wow-delay=".1s">
+						<div class="service-box">
+                            <div class="icon">
+                                <i class="icon_currency_alt"></i><h3>Passer une commande </h3>
+                            </div>
+                            
+                            <p>Passer une commande pour déguster plus nos plats</p>
+                        </div>
+</div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 text-xs-center wow fadeInDown" data-wow-delay=".1s">
+						<div class="service-box">
+                            <div class="icon">
+                                <i class="icon_map_alt"></i><h3>Consulter Google Maps</h3>
+                            </div>
+                            
+                            <p>Pour une Direction directe a notre restaurant</p>
+                        </div>
+</div>
+                    </div>
+		
+	
+                     
+                    </div> 
+                
+                </div> 
+
+            </div>
+        </div>
+
+            </div>
+        </div>
+    </section> 
+      {% endblock %}
+   {% block Menu %} {% endblock %}
+   {% block portfolio %}{% endblock %}
+   {% block info %} {% endblock %}
+   {% block team %} {% endblock %} 
+   {% block Clients %} {% endblock %}
+

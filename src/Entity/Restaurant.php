@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Restaurant
@@ -27,28 +27,42 @@ class Restaurant
 
     /**
      * @var string|null
-     *
+     *  * @Assert\NotBlank(message=" description doit etre non vide")
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 100,
+     *      minMessage = "doit etre >=7 ",
+     *      maxMessage = "doit etre <=100" )
      * @ORM\Column(name="Description", type="string", length=50, nullable=true)
      */
     private $description;
 
     /**
      * @var string
-     *
+     * * @Assert\NotBlank(message=" nom doit etre non vide")
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 100,
+     *      minMessage = "doit etre au min de 4 lettres ",
+     *      maxMessage = "doit etre maximuim de 30 lettres" )
      * @ORM\Column(name="nom", type="string", length=30, nullable=false)
      */
     private $nom;
 
     /**
      * @var int|null
-     *
+     * * @Assert\NotBlank(message=" LE NOMBRE DE FOURCHETTES EST LIMITER ENTRE 1 ET 5")
+     * @Assert\GreaterThanOrEqual(value=1,message="le nombre de fourchettes doit etre entre 1 et 5")
+     * * @Assert\LessThanOrEqual(value=5,message="le nombre de fourchettes doit etre entre 1 et 5")
      * @ORM\Column(name="Fourchette", type="integer", nullable=true)
      */
     private $fourchette;
 
     /**
      * @var int
-     *
+     * * * @Assert\NotBlank(message=" LE NOMBRE DE places EST LIMITER ENTRE 5 ET 100")
+     * @Assert\LessThanOrEqual(value=100,message="le nombre de fourchettes doit etre entre 5 et 100")
+     * * @Assert\GreaterThanOrEqual(value=5,message="le nombre de fourchettes doit etre entre 5 et 100")
      * @ORM\Column(name="placeLibres", type="integer", nullable=false)
      */
     private $placelibres;

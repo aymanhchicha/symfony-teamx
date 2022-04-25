@@ -30,8 +30,8 @@
                 <td>{{ plat.prix }}</td>
                 <td>{{ plat.categorie }}</td>
                 <td>
-                    <a  class="btn btn-info"  href="{{ path('plat_show', {'platid': plat.platid}) }}">show</a>
-                    <a class="btn btn-success" href="{{ path('plat_edit', {'platid': plat.platid}) }}">edit</a>
+                    <a  class="btn btn-info"  href="{{ path('plat_show', {'platid': plat.platid}) }}">Consul</a>
+                    <a class="btn btn-success" href="{{ path('plat_edit', {'platid': plat.platid}) }}">MOdif</a>
                    <a class="btn btn-danger" href="{{ path('plat_delete', {'platid': plat.platid}) }}">Supprimer</a>
                 </td>
             </tr>
@@ -40,5 +40,5 @@
         </tbody>
     </table>
 
-    <a  class="btn btn-primary"  href="{{ path('plat_new') }}">Create new</a>
+    <a  class="btn btn-primary"  href="{{ path('plat_new') }}">Ajouter Nouveau</a>
 {% endblock %}

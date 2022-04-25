@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Menu;
 use App\Entity\Menuplat;
+use App\Entity\Plat;
 use App\Form\MenuplatType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +28,7 @@ class MenuplatController extends AbstractController
             ->findAll();
 
         return $this->render('menuplat/index.html.twig', [
-            'menuplats' => $menuplats,
+            'menuplats' => $menuplats
         ]);
     }
 

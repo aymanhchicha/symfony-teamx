@@ -6,15 +6,17 @@
 
 {% block body %}
     <div class="row">
-        <div  style="display: flex;align-items: center;justify-content: center;margin-top: 150px; padding: 10px;">
+       <div  style="display: flex;align-items: center;justify-content: center;margin-top: 150px; padding: 10px;">
 
             <div class="card">
                 <div class="card-body">
+      <a href="{{ path('restaurant_index') }}"  class="ri-arrow-left-circle-fill" style="font-size: 50px"></a>
                     <h5 class="card-title">Ajouter Restaurant</h5>
 
-                    <!-- General Form Elements -->
-                   {{ form_start(form) }}
-    {{ form_widget(form) }}
+                     <!-- General Form Elements -->
+                    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                    {{ form_widget(form) }}
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 

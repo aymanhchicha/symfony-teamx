@@ -4,11 +4,18 @@
 
 {% block body %}
     <h1>Restaurant index</h1>
+<div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+
+    <div class="col-lg-7">
+
+        <div class="card">
+            <div class="card-body">
+                            <a href="{{ path('restaurant_index') }}"><i class="ri-arrow-left-circle-fill" style="font-size: 50px;"></i></a>
 
     <table class="table">
         <thead>
+         <h5 class="card-title">Liste des Restaurants</h5>
             <tr>
-                <th>Id</th>
                 <th>Description</th>
                 <th>Nom</th>
                 <th>Fourchette</th>
@@ -21,7 +28,6 @@
         <tbody>
         {% for restaurant in restaurants %}
             <tr>
-                <td>{{ restaurant.id }}</td>
                 <td>{{ restaurant.description }}</td>
                 <td>{{ restaurant.nom }}</td>
                 <td>{{ restaurant.fourchette }}</td>
@@ -29,8 +35,10 @@
                 <td>{{ restaurant.placereservees }}</td>
                 <td>{{ restaurant.totalplace }}</td>
                 <td>
-                    <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">show</a>
-                    <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
+                    <a class="btn btn-info"  href="{{ path('restaurant_show', {'id': restaurant.id}) }}">consulter</a>
+                    <a  class="btn btn-success" href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">modifier</a>
+                    <a class="btn btn-danger" href="{{ path('restaurant_delete', {'id': restaurant.id}) }}">Supprimer</a>
+
                 </td>
             </tr>
         {% else %}

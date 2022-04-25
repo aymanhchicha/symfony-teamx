@@ -55,23 +55,20 @@ class MenuController extends AbstractController
 
 
 
-   /**
-     * @Route("/xx", name="xx", methods={"GET", "POST"})
-     */
+   
 
-    public function newmenu(String $titre,EntityManagerInterface $entityManager): String
-    {
-        $menu = new Menu("aa",$titre);
+    public function newmenu(String $titre,EntityManagerInterface $entityManager)
+    {  dump($titre);
+
+        $menu = new Menu();
+              $menu->setDescription("aaaaa");
+              $menu->setTitre($titre);
             $entityManager->persist($menu);
             $entityManager->flush();
-
-            return $this->redirectToRoute('menu_index', [], Response::HTTP_SEE_OTHER);
+            $entityManager->refresh($menu);
+            dump($menu);
       
 
-        return $this->render('menu/new.html.twig', [
-            'menu' => $menu
-           
-        ]);
     }
 
     /**

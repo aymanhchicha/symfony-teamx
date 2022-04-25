@@ -35,13 +35,7 @@ class MenuRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function SearchByName($nom){
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT id FROM App\Entity\Menu m WHERE m.titre like :nom ')
-            ->setParameter('nom',$nom);
-        return $query->getResult();
 
-    }
     /*
     public function findOneBySomeField($value): ?Menu
     {

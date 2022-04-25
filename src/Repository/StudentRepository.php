@@ -53,7 +53,6 @@ class StudentRepository extends ServiceEntityRepository
             ->setParameter('min',$min)
             ->setParameter('max',$max);
         return $query->getResult();
-
     }
 
     public function studentsNotAddmited()
