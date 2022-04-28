@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Search;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -34,24 +37,46 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
-    }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    }
+    /**
+     * @return User[]
+     */
+    public function findtest():array
+    {
+        return $this->findVisibleQuery()
+            ->getQuery()
+            ->getResult();
+    }
+    /**
+     * @return User[]
+     */
+
+    public function findAllVisibleQuery(Search $search):array
+    {
+        $query = $this->findVisibleQuery();
+        if($search->getNom()){
+            $query= $query
+                ->andWhere('u.nom = :name')
+                ->setParameter('name',$search->getNom());
+        }if($search->getPrenom()){
+            $query= $query
+                ->andwhere('u.prenom = :pre')
+                ->setParameter('pre',$search->getPrenom());
+        }
+        return $query->getQuery()
+            ->getResult();
+    }
+   
+
+    private function findVisibleQuery() :QueryBuilder
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?User

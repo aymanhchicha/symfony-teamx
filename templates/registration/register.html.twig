@@ -14,44 +14,72 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-                        <div class="d-flex justify-content-center py-4">
-                            <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                <img src="assets/img/logo.png" alt="">
-                                <span class="d-none d-lg-block">NiceAdmin</span>
-                            </a>
-                        </div><!-- End Logo -->
+
 
                         <div class="card mb-3">
 
                             <div class="card-body">
 
                                 <div class="pt-4 pb-2">
-                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                                    <p class="text-center small">Enter your personal details to create account</p>
+                                    <h5 class="card-title text-center pb-0 fs-4">Créer un Compte</h5>
+                                    <p class="text-center small">Entrer vos details pour créer un compte</p>
                                 </div>
 
                                 {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                                <div class="col-12">
+                                    <label for="inputEmail" class="form-label">E-mail</label>
+                                    {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+                                    <div class="invalid-feedback">votre E-mail n'est pas valide!</div>
+                                </div>
                                     <div class="col-12">
-                                        <label for="yourName" class="form-label">Your Name</label>
+                                        <label for="Nom" class="form-label">Nom</label>
                                         {{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
                                         <div class="invalid-feedback">Please, enter your name!</div>
                                     </div>
+                                <div class="col-12">
+                                    <label for="Prenom" class="form-label">Prenom</label>
+                                    {{ form_widget(form.prenom,{'attr':{'class':'form-control'}}) }}
+                                    <div class="invalid-feedback">Votre prenom</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="Numero" class="form-label">Numéro</label>
+                                    {{ form_widget(form.numtel,{'attr':{'class':'form-control'}}) }}
+                                    <div class="invalid-feedback">Votre Numero!!</div>
+                                </div>
+                                <fieldset class="row mb-3">
+                                    <legend class="col-form-label col-sm-4 pt-0">Role</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            {{ form_widget(form.roles,{'attr':{'class':'form-check-input'}}) }}
+                                        </div>
+                                        <div class="form-check">
+                                            {{ form_widget(form.roles,{'attr':{'class':'form-check-input'}}) }}
 
-                                    <div class="col-12">
-                                        <label for="yourEmail" class="form-label">Your Email</label>
-                                        {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
-                                        <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                        </div>
+                                        <div class="form-check">
+                                            {{ form_widget(form.roles,{'attr':{'class':'form-check-input'}}) }}
+
+                                        </div>
                                     </div>
+                                </fieldset>
 
                                     <div class="col-12">
-                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <label for="yourPassword" class="form-label">Mot de passe</label>
                                         {{ form_widget(form.password.first,{'attr':{'class':'form-control'}}) }}
+                                        {{ form_errors(form.password.first,{'attr':{'class':'text-danger'}}) }}
                                         <div class="invalid-feedback">Please enter your password!</div>
                                     </div>
                                 <div class="col-12">
-                                    <label for="yourPassword" class="form-label">Confirm Password</label>
+                                    <label for="yourPassword" class="form-label">Confirmer Votre Mot de passe</label>
                                     {{ form_widget(form.password.second,{'attr':{'class':'form-control'}}) }}
                                     <div class="invalid-feedback">Please confirm your password!</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        {{ form_row(form.captchaCode) }}
+
+                                    </div>
                                 </div>
 
                                     <div class="col-12">
@@ -62,10 +90,10 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                        <button class="btn btn-primary w-100" type="submit">Créer votre Compte</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                                        <p class="small mb-0">t'a déja un compte? <a href="login">Conneté vous</a></p>
                                     </div>
                                 {{ form_end (form) }}
 

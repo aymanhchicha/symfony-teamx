@@ -20,7 +20,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration", name="registration")
      */
-    public function index(Request $request)
+    public function index(Request $request,MailService $mailer)
     {
         $user = new User();
 
@@ -32,14 +32,15 @@ class RegistrationController extends AbstractController
             // Encode the new users password
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
 
-            // Set their role
-            $user->setRoles(['ROLE_USER']);
+
 
             // Save
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
+            $mailmessage= $user->getNom().' '.$user->getPrenom().' '.'Welcome to our application ';
+            $email=$user->getEmail();
+            $mailer->index($email,$mailmessage);
             return $this->redirectToRoute('app_login');
         }
 

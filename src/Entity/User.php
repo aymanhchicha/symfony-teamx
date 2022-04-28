@@ -24,18 +24,22 @@ class User implements UserInterface
     /**
      * @var string|null
      * @Asserts\NotBlank(message="Email doit etre non vide")
+     * @Asserts\Email(
+     *     message = "The email is not a valid email."
+     * )
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @var string|null
+     *
+     * @ORM\Column(name="Role", type="string", length=50, nullable=true)
      */
-    private $roles = [];
+    private $roles ;
 
     /**
      * @var string The hashed password
-     * @var string
      * @Asserts\NotBlank(message="Mot de passe doit etre non vide")
      * @Asserts\Length(
      *     min=8,
@@ -64,6 +68,18 @@ class User implements UserInterface
      * @ORM\Column(name="Prenom", type="string", length=30, nullable=true)
      */
     private $prenom;
+
+    protected $captchaCode;
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
 
     public function getId(): ?int
     {
@@ -143,16 +159,12 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles(): ?string
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(?string $roles): self
     {
         $this->roles = $roles;
 

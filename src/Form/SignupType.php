@@ -19,7 +19,7 @@ class SignupType extends AbstractType
             ->add('Nom')
             ->add('Prenom')
             ->add('Numtel')
-            ->add('Role',ChoiceType::class, [
+            ->add('Roles',ChoiceType::class, [
                 'choices' => [
                     'Admin' => 'admin',
                     'Proprietaire' => 'proprietaire',
@@ -27,7 +27,7 @@ class SignupType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('Mp')
+            ->add('password')
             ->add('ajouter',SubmitType::class)
 
         ;
