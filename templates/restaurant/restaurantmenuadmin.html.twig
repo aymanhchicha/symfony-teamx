@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plat index{% endblock %}
+
+{% block body %}
+    <h1>Plat index</h1>
+<div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-body">
+                <a href="{{ path('plat_index') }}"><i class="ri-arrow-left-circle-fill" style="font-size: 50px;"></i></a>
+<table class="table table-striped">
+ <h5 class="card-title">Liste des plats</h5>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Categorie</th>
+                <th>actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for plate in plats %}
+        
+         
+
+           
+            <tr>
+
+                <td>{{ plate.idplat.description }}</td>
+                <td>{{ plate.idplat.nom }}</td>
+                <td>{{ plate.idplat.prix }}</td>
+                <td>{{ plate.idplat.categorie }}</td>
+
+                <td>
+                    <a  class="btn btn-info"  href="{{ path('plat_show', {'platid': plate.idplat.platid}) }}">Consul</a>
+                    <a class="btn btn-success" href="{{ path('plat_edit', {'platid': plate.idplat.platid}) }}">MOdif</a>
+                   <a class="btn btn-danger" href="{{ path('plat_delete', {'platid': plate.idplat.platid}) }}">Supprimer</a>
+                </td>
+            </tr>
+        
+        {% endfor %}
+        </tbody>
+    </table>
+    <a  class="btn btn-primary"  href="{{ path('plat_new') }}">Ajouter Nouveau</a>
+    {% endblock %}

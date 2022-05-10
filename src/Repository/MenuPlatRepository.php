@@ -35,7 +35,17 @@ class MenuPlatRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function idplatget($idmenu){
+      
+        return $xx =$this->createQueryBuilder('s')
+        ->andWhere('s.idmenu = :nsc')
+        ->setParameter('nsc',$idmenu)
+        ->getQuery()
+        ->getResult();
+    }
 
+
+    
     /*
     public function findOneBySomeField($value): ?Menuplat
     {

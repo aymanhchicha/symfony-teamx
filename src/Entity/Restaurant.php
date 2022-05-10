@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -90,6 +91,11 @@ class Restaurant
      * })
      */
     private $menuid;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -180,5 +186,21 @@ class Restaurant
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+public function show(): string
+{
+    return 'restaurant  :'. $this->nom .'adresse :'. $this->description ;
+
+}
 
 }

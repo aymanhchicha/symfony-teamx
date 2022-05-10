@@ -11,14 +11,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Menu;
 use App\Entity\Plat;
+use App\Repository\MenuPlatRepository;
 use App\Repository\MenuRepository;
 use App\Repository\PlatRepository;
+use App\Repository\RestaurantRepository;
+use App\Services\QrcodeService;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Endroid\QrCode\Builder\BuilderInterface;
+use Endroid\QrCodeBundle\Response\QrCodeResponse;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\QrCode;
 
-use PhpParser\Node\Expr\Cast\String_;
-use SebastianBergmann\Environment\Console;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\ExpressionLanguage\Node\GetAttrNode;
+
+
 
 /**
  * @Route("/restaurant")
@@ -43,18 +50,32 @@ class RestaurantController extends AbstractController
  /**
  * @Route("/menuresto/{id}", name="restaurantMenu_show", methods={"GET"})
  */
-    public function showmenu(Restaurant $restaurant,EntityManagerInterface $entityManager,platRepository $rep): Response
+    public function showmenu(Restaurant $restaurant,EntityManagerInterface $entityManager,platRepository $rep,MenuPlatRepository $plm,MenuRepository $rest): Response
     {
-        $id =$restaurant->getId();
-        $plat = $rep->listplatByResto($id);
-        dd($plat);
+        $id =$restaurant->getMenuid();
+        $idmenu=$rest->idresto($id);
+
+        $plats=$plm->idplatget($idmenu);
         return $this->render('restaurant/consulterResto.html.twig', [
-            'restaurant' => $restaurant,
+            'restaurant' => $restaurant,'plats'=>$plats
         ]);
     
     }
 
 
+     /**
+ * @Route("/menurestoadmin/{id}", name="restaurantMenuadmin_show", methods={"GET"})
+ */
+public function showmenuadmin(Restaurant $restaurant,EntityManagerInterface $entityManager,platRepository $rep,MenuPlatRepository $plm,MenuRepository $rest,PlatRepository $plt): Response
+{
+    $id =$restaurant->getMenuid();
+    $idmenu=$rest->idresto($id);
+    $plats=$plm->idplatget($idmenu);
+    return $this->render('restaurant/restaurantmenuadmin.html.twig', [
+        'restaurant' => $restaurant,'plats'=>$plats
+    ]);
+
+}
 
 
 
@@ -67,11 +88,28 @@ class RestaurantController extends AbstractController
     {
         $restaurant = new Restaurant();
         $menu=new menu();
-
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
+/** @var UploadedFile $brochureFile */
+$image = $form->get('image')->getData();
+
+if ($image) {
+    $newFilename = uniqid() . '.' . $image->guessExtension();
+
+    try {
+        $image->move(
+            $this->getParameter('restaurant_picture'),
+            $newFilename
+        );
+    } catch (FileException $e) {
+    }
+
+    $restaurant->setImage($newFilename);
+}
+
             $titre=$restaurant->getNom();
         
             $MenuController=new MenuController;
@@ -99,8 +137,22 @@ class RestaurantController extends AbstractController
      */
     public function show(Restaurant $restaurant): Response
     {
+        
         return $this->render('restaurant/show.html.twig', [
             'restaurant' => $restaurant,
+        ]);
+    }
+
+     /**
+     * @Route("/recherche", name="restaurantRecherche")
+     */
+    public function recherche(RestaurantRepository $rep,Request $request): Response
+    {
+        $data=$request->get('rech');
+        $restaurants=$rep->findBy(['nom'=>$data]);
+       
+        return $this->render('restaurant/index.html.twig', [
+            'restaurants' => $restaurants,
         ]);
     }
 

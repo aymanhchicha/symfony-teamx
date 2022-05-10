@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Plat;
+use App\Entity\Menu;
+use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -35,12 +37,16 @@ class PlatRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function listplatByResto($id){
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT * FROM App\Entity\plat p join  App\Entity\menuplat mp on p.id=mp.idplat   WHERE mp.idmenu=(select idmenu from restaurant where id = :id) ')
-            ->setParameter('id',$id);
-         return $query->getResult();
+    public function idplat($id){
+      
+        return $xx =$this->createQueryBuilder('s')
+        ->andWhere('s. = :nsc')
+        ->setParameter('nsc',$id)
+        ->getQuery()
+        ->getResult();
     }
+
+
     /*
     public function findOneBySomeField($value): ?Plat
     {

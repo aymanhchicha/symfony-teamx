@@ -79,7 +79,13 @@
                         {% for rest in restaurants %}
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="{{asset('assets/front/images/rest1.jpg')}}"  class="card-img-top">
+
+           
+ <img src="{{ asset('uploads/' ~ rest.image)| imagine_filter('square') }}"
+                                class="card-img-top" >
+
+
+
                     <div class="card-body">
                         <p class="card-text"> le restaurant{{ rest.nom }}</p>
                         <div class="d-flex justify-content-between align-item-center">

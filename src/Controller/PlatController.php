@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Plat;
 use App\Form\PlatType;
+use App\Repository\PlatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,20 @@ class PlatController extends AbstractController
     {
         return $this->render('plat/show.html.twig', [
             'plat' => $plat,
+        ]);
+    }
+
+
+   /**
+     * @Route("/recherche", name="platRecherche")
+     */
+    public function recherche(PlatRepository $rep,Request $request): Response
+    {
+        $data=$request->get('rech');
+        $plats=$rep->findBy(['nom'=>$data]);
+       
+        return $this->render('plat/index.html.twig', [
+            'plats' => $plats,
         ]);
     }
 

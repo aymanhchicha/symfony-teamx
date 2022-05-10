@@ -18,7 +18,15 @@ class MenuRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Menu::class);
     }
+    public function idresto($id){
 
+        return $xx =$this->createQueryBuilder('s')
+        ->andWhere('s.id = :nsc')
+        ->setParameter('nsc',$id)
+        ->getQuery()
+        ->getResult();
+        
+        }
     // /**
     //  * @return Menu[] Returns an array of Menu objects
     //  */
