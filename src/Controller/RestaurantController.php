@@ -46,6 +46,48 @@ class RestaurantController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/stat/resto", name="restaurant_stat")
+     */
+    public function statresto(): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Restaurant::class);
+        $restaurant=$repo->findAll();
+        $stars = ["One Star","Tow Stars","Three Stars","Four Stars","Five Stars"];
+        $starsNb = [];
+        $backgroundcol = [];
+        $bordercol = [];
+        $backgroundcol = ['rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)'] ;
+        for($i = 1; $i<6 ; $i++)
+        {
+            $nb = 0;
+            foreach($restaurant as $resto)
+            {
+                if($resto->getFourchette() == $i)
+                {
+                    $nb++;
+                }
+                
+            }
+            $starsNb[] = $nb;
+           
+            $bordercol[] = 'rgb(75, 192, 192)';
+        }
+        
+        return $this->render('restaurant/stat.html.twig', [
+            'restaurant' => $restaurant,
+            'stars' => json_encode($stars),
+            'starsNb' => json_encode(($starsNb)),
+            'color' => json_encode($backgroundcol),
+            'bordercolor' => json_encode($bordercol)
+        ]);
+    }
+
+
 
  /**
  * @Route("/menuresto/{id}", name="restaurantMenu_show", methods={"GET"})
@@ -132,6 +174,7 @@ if ($image) {
         ]);
     }
 
+  
     /**
      * @Route("/{id}", name="restaurant_show", methods={"GET"})
      */

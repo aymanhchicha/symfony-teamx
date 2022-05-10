@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+
+    <div class="col-lg-6">
+    <canvas id="mychart" width="40" height="10" ></canvas>
+
+    </div>
+        </div>
+ {{dump()}}
+
+      <script>
+            let stat = document.querySelector("#mychart")
+            var myBarChart = new Chart(stat, {
+                        type: 'polarArea',
+                        data: {
+                            labels: {{ stars | raw }},
+                            datasets: [{
+                                label: "stars of  rest",
+                                data: {{ starsNb | raw }},
+                                backgroundColor: {{ color | raw }},
+                                borderWidth: 1,
+                            }]
+                        },
+                      
+                        
+});
+      </script> 
+      {% endblock %}
+
